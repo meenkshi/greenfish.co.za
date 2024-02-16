@@ -11,11 +11,11 @@ This snippet auto generate by LayoutHub. Please DO NOT modify it
 {%- unless request.path contains 'apps/layouthub' -%}
 	{%- if shop.metafields.layouthub  -%}
 		{%- if shop.metafields.layouthub.fonts -%}
-			{{- shop.metafields.layouthub.fonts.value -}}
+			{{- shop.metafields.layouthub.fonts.value | replace: ' href="' , ' data-href="' -}}
 		{%- endif -%}
-		<link rel="stylesheet" type="text/css" href="data:text/css;base64,{{shop.metafields.layouthub.theme.value}}" media="all">
+		<link rel="stylesheet" type="text/css" data-href="data:text/css;base64,{{shop.metafields.layouthub.theme.value}}" media="all">
 		{%- if shop.metafields.layouthub.anti_copy -%}
-			{{ shop.metafields.layouthub.anti_copy.value }}
+			{{ shop.metafields.layouthub.anti_copy.value | replace: ' href="' , ' data-href="' }}
 		{%- endif -%}
     {%- endif -%}
     {%- if shop.metafields.layouthub.scripts -%}

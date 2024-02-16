@@ -1,5 +1,5 @@
-{{ 'recurpay.css' | asset_url | stylesheet_tag }}
-<script>
+<link rel="stylesheet" data-href="{{ 'recurpay.css' | asset_url }}">
+<script type="lazyload_int">
   (function() {
     //Append Script
     var initScript = function(url, callback) {

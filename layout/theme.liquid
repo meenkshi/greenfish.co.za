@@ -1,26 +1,23 @@
 <!doctype html>
 <html lang="en-ZA" class="no-js">
-    <head>
+    <head>            
         {%- render 'layouthub_header' -%}
         {% render 'pagefly-head' %}
-
-      <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W4VL8NZ');</script>
-<!-- End Google Tag Manager -->
-      
-          <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X8SV9ZDVWX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-X8SV9ZDVWX');
-  gtag('config', 'AW-303097801');
+        <!-- Google Tag Manager -->
+        <script type="lazyload2">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-W4VL8NZ');</script>
+        <!-- End Google Tag Manager -->      
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script type="lazyload2" data-src="https://www.googletagmanager.com/gtag/js?id=G-X8SV9ZDVWX"></script>
+        <script type="lazyload2">
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());          
+            gtag('config', 'G-X8SV9ZDVWX');
+            gtag('config', 'AW-303097801');
         </script>
         <!-- END Google tag (gtag.js) -->
         <!-- FB ================================================== -->
@@ -80,13 +77,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             document.documentElement.className = document.documentElement.className.replace('no-js', 'supports-js');
         </script>
         <!-- Header hook for plugins ================================================== -->
+          
         {%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
-        	{{ content_for_header }}
+            {{ content_for_header }}
         {%- else -%}
-        	{% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
-        	{{ content_for_header2 | replace: ' defer="defer" ', ' type="lazyload2" ' | replace: " src=", " data-src=" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('wnw_load', asyncLoad, false);" | replace: "DOMContentLoaded", "DOMContentLoaded2" }}
-        	<script>var trekkie=[];trekkie.integrations=!0;window.BOOMR={},window.BOOMR.version=true;</script>
+            {% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
+            {{ content_for_header2 | replace: ' async="async" ', ' type="lazyload2" ' | replace: ' defer="defer" ', ' type="lazyload2" ' | replace: " src=", " data-src=" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('wnw_load', asyncLoad, false);" | replace: "DOMContentLoaded", "DOMContentLoaded2" | replace: "addEventListener('load', prefetchAssets);", "addEventListener('wnw_load', prefetchAssets);" | replace: '<script type="module" data-src="' , '<script type="lazyload_int" data-w3-type="module" data-src="' }}
+            <script>var trekkie=[];trekkie.integrations=!0;window.BOOMR={},window.BOOMR.version=true;</script>
         {%- endif -%}
+        
         {{ 'jquery-2.2.3.min.js' | asset_url | script_tag }}
         <script type="lazyload2" data-src="{{ 'lazysizes.min.js' | asset_url }}"></script>
         <link rel="stylesheet" data-href="https://use.typekit.net/dcv2pba.css">
@@ -98,138 +97,129 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {% endif %}
         {% include 'pagefly-header' %}
         <link rel="stylesheet" data-href="{{ 'crowdfunder.scss.css' | asset_url }}">
-      <style>
-  .breadcrumbs {
-    margin: 0 0 2em;
-  }
-
-  .breadcrumbs__list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .breadcrumbs__item {
-    display: inline-block;
-  }
-
-  .breadcrumbs__item:not(:last-child):after {
-    border-style: solid;
-    border-width: .10em .10em 0 0;
-    content: '';
-    display: inline-block;
-    height: .20em;
-    margin: 0 .20em;
-    position: relative;
-    transform: rotate(45deg);
-    vertical-align: middle;
-    width: .20em;
-  }
-
-  .breadcrumbs__link {
-    text-decoration: underline;
-  }
-
-  .breadcrumbs__link[aria-current="page"] {
-    color: inherit;
-    font-weight: normal;
-    text-decoration: none;
-  }
-
-  .breadcrumbs__link[aria-current="page"]:hover,
-  .breadcrumbs__link[aria-current="page"]:focus {
-    text-decoration: underline;
-  }
-</style>
+        <style>
+            .breadcrumbs {
+                margin: 0 0 2em;
+            }          
+            .breadcrumbs__list {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }          
+            .breadcrumbs__item {
+                display: inline-block;
+            }          
+            .breadcrumbs__item:not(:last-child):after {
+                border-style: solid;
+                border-width: .10em .10em 0 0;
+                content: '';
+                display: inline-block;
+                height: .20em;
+                margin: 0 .20em;
+                position: relative;
+                transform: rotate(45deg);
+                vertical-align: middle;
+                width: .20em;
+            }          
+            .breadcrumbs__link {
+                text-decoration: underline;
+            }          
+            .breadcrumbs__link[aria-current="page"] {
+                color: inherit;
+                font-weight: normal;
+                text-decoration: none;
+            }          
+            .breadcrumbs__link[aria-current="page"]:hover,
+            .breadcrumbs__link[aria-current="page"]:focus {
+                text-decoration: underline;
+            }
+        </style>
+        {% render 'custom-css' %}
     </head> 
     <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ request.page_type | handle }}">
-
-      <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4VL8NZ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-      
-      <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X8SV9ZDVWX"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-X8SV9ZDVWX');
-      </script>
-      <!-- END Google tag (gtag.js) -->
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4VL8NZ"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->      
+        <!-- Google tag (gtag.js) -->
+        <script type="lazyload2" data-src="https://www.googletagmanager.com/gtag/js?id=G-X8SV9ZDVWX"></script>
+        <script type="lazyload2">
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-X8SV9ZDVWX');
+        </script>
+        <!-- END Google tag (gtag.js) -->
         {% section 'header' %}
         {% if request.page_type == 'index' %}
             <main class="main-content" role="main">
-
         {% else %}
             <main class="wrapper main-content" role="main">
-                            {%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
-{%- assign t = template | split: '.' | first -%}
-
-<nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
-  <ol class="breadcrumbs__list">
-    <li class="breadcrumbs__item">
-      <a class="breadcrumbs__link" href="/">Home</a>
-    </li>
-    {%- case t -%}
-      {%- when 'page' -%}
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
-        </li>
-      {%- when 'product' -%}
-        {%- if collection.url -%}
-          <li class="breadcrumbs__item">
-            {{ collection.title | link_to: collection.url }}
-          </li>
-        {%- endif -%}
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
-        </li>
-      {%- when 'collection' and collection.handle -%}
-        {%- if current_tags -%}
-          <li class="breadcrumbs__item">
-            {{ collection.title | link_to: collection.url }}
-          </li>
-          <li class="breadcrumbs__item">
-            {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+"}}{%- endcapture -%}
-            <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + "}}</a>
-          </li>
-        {%- else -%}
-          <li class="breadcrumbs__item">
-            <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
-          </li>
-        {%- endif -%}
-      {%- when 'blog' -%}
-        {%- if current_tags -%}
-          <li class="breadcrumbs__item">
-            {{ blog.title | link_to: blog.url }}
-          </li>
-          <li class="breadcrumbs__item">
-            {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
-            <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
-          </li>
-        {%- else -%}
-          <li class="breadcrumbs__item">
-            <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
-          </li>
-        {%- endif -%}
-      {%- when 'article' -%}
-        <li class="breadcrumbs__item">
-          {{ blog.title | link_to: blog.url }}
-        </li>
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
-        </li>
-      {%- else -%}
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
-        </li>
-    {%- endcase -%}
-  </ol>
-</nav>
-{%- endunless -%}
-        {% endif %}
+                {%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+                    {%- assign t = template | split: '.' | first -%}
+                    <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
+                        <ol class="breadcrumbs__list">
+                            <li class="breadcrumbs__item">
+                                <a class="breadcrumbs__link" href="/">Home</a>
+                            </li>
+                            {%- case t -%}
+                            {%- when 'page' -%}
+                                <li class="breadcrumbs__item">
+                                    <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+                                </li>
+                            {%- when 'product' -%}
+                                {%- if collection.url -%}
+                                    <li class="breadcrumbs__item">
+                                        {{ collection.title | link_to: collection.url }}
+                                    </li>
+                                {%- endif -%}
+                                <li class="breadcrumbs__item">
+                                    <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+                                </li>
+                            {%- when 'collection' and collection.handle -%}
+                                {%- if current_tags -%}
+                                    <li class="breadcrumbs__item">
+                                        {{ collection.title | link_to: collection.url }}
+                                    </li>
+                                    <li class="breadcrumbs__item">
+                                        {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+"}}{%- endcapture -%}
+                                        <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + "}}</a>
+                                    </li>
+                                {%- else -%}
+                                    <li class="breadcrumbs__item">
+                                        <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+                                    </li>
+                                {%- endif -%}
+                            {%- when 'blog' -%}
+                                {%- if current_tags -%}
+                                    <li class="breadcrumbs__item">
+                                        {{ blog.title | link_to: blog.url }}
+                                    </li>
+                                    <li class="breadcrumbs__item">
+                                        {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+                                        <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+                                    </li>
+                                {%- else -%}
+                                    <li class="breadcrumbs__item">
+                                        <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+                                    </li>
+                                {%- endif -%}
+                            {%- when 'article' -%}
+                                <li class="breadcrumbs__item">
+                                    {{ blog.title | link_to: blog.url }}
+                                </li>
+                                <li class="breadcrumbs__item">
+                                    <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+                                </li>
+                            {%- else -%}
+                                <li class="breadcrumbs__item">
+                                    <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+                                </li>
+                            {%- endcase -%}
+                        </ol>
+                    </nav>
+                {%- endunless -%}
+            {% endif %}
             <!--LayoutHub-Workspace-Start-->{{ content_for_layout }}<!--LayoutHub-Workspace-End-->
         </main>
         {% section 'section_newsletter' %}
@@ -256,64 +246,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         {%- render 'layouthub_footer' -%} 
         {% comment %}
         {{ 'rjs.js' | asset_url | script_tag }}              
-        {% endcomment %}
+        {% endcomment %}        
+        {% render 'recurpay' %}
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Green Fish",
+            "image": "https://greenfish.co.za/cdn/shop/files/gf-logo.svg?v=14017491584199371199",
+            "@id": "",
+            "url": "https://greenfish.co.za/",
+            "telephone": "063 666 2802",
+            "priceRange": "R",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Unit E, Berkley Square, Reyger Road, Maitland, Cape Town",
+                "addressLocality": "Cape Town",
+                "postalCode": "7405",
+                "addressCountry": "ZA"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 33.92417190468976,
+                "longitude": 18.495416275584475
+            },
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+                ],
+                "opens": "00:00",
+                "closes": "23:59"
+            },
+            "sameAs": [
+                "https://www.instagram.com/greenfishsa/",
+                "https://www.facebook.com/greenfishsa/"
+            ] 
+            }
+        </script>
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org/",
+            "@type": "WebSite",
+            "name": "Green Fish",
+            "url": "https://greenfish.co.za/",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://greenfish.co.za/search?q={search_term_string}https://greenfish.co.za/products/fresh-yellowfin-tuna-steaks?_pos=1&_sid=2ecd19946&_ss=r",
+                "query-input": "required name=search_term_string"
+            }
+            }
+        </script>
         {{ 'wnw-optimization.js' | asset_url | script_tag }}
-    {% render 'recurpay' %}
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Green Fish",
-  "image": "https://greenfish.co.za/cdn/shop/files/gf-logo.svg?v=14017491584199371199",
-  "@id": "",
-  "url": "https://greenfish.co.za/",
-  "telephone": "063 666 2802",
-  "priceRange": "R",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Unit E, Berkley Square, Reyger Road, Maitland, Cape Town",
-    "addressLocality": "Cape Town",
-    "postalCode": "7405",
-    "addressCountry": "ZA"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 33.92417190468976,
-    "longitude": 18.495416275584475
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
-    "opens": "00:00",
-    "closes": "23:59"
-  },
-  "sameAs": [
-    "https://www.instagram.com/greenfishsa/",
-    "https://www.facebook.com/greenfishsa/"
-  ] 
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "WebSite",
-  "name": "Green Fish",
-  "url": "https://greenfish.co.za/",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://greenfish.co.za/search?q={search_term_string}https://greenfish.co.za/products/fresh-yellowfin-tuna-steaks?_pos=1&_sid=2ecd19946&_ss=r",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-
-</body>
+    </body>
 </html> 
