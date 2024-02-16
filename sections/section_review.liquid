@@ -1,0 +1,68 @@
+<div class="section offset" id="section_{{section.id}}">  
+    <div class="Container">
+    {%- if section.settings.title != blank -%}
+    <div class="SectionHeader center">
+        <h2 class="SectionSmallTitle">{{section.settings.title}}</h2>
+        {%- if section.settings.badge != blank -%}
+        {{section.settings.badge}}
+        {%- endif -%}
+    </div>
+    {%- endif -%}
+
+    <div class="SectionContent">
+        {%- if section.settings.carousel != blank -%}
+        {{section.settings.carousel}}
+        {%- endif -%}
+
+        {%- if section.settings.cta_link != blank -%}
+        <div class="ReviewLink">
+            <a href="{{section.settings.cta_link}}" target="_blank">{{section.settings.cta_label}}</a>
+        </div>
+        {%- endif -%}
+    </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Review",  
+  "class": "section-review",
+  "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "html",
+        "id": "badge",
+        "label": "Badge"
+      },
+      {
+        "type": "html",
+        "id": "carousel",
+        "label": "Carousel"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA Label"
+      }     
+	],
+  "presets": [
+    {
+      "name": "Section Review",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

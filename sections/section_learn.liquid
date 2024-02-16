@@ -1,0 +1,167 @@
+<style>
+    #section_{{section.id}} .Container {
+        padding: 0 25px;
+        max-width: 1370px;
+        margin: 0 auto;
+    } 
+    #section_{{section.id}} .SectionButton {
+        margin-bottom: 15px;
+    }
+    #section_{{section.id}} .SectionButton a {
+        color: #939191;
+        font-family: "proxima-nova",sans-serif;
+        font-size: 19.8px;
+        letter-spacing: 0;
+        line-height: 34.1px;
+        border: 1.1px solid #939191;
+        padding: 10px 15px;
+        text-align: center;
+        display: inline-block;
+    } 
+
+    #section_{{section.id}} .SectionText {
+        max-width: 520px;
+    }
+
+    #section_{{section.id}} .FlexItem:first-child {
+        padding-right: 30px;
+    }
+
+    #section_{{section.id}} .FlexItem:last-child {
+        padding-left: 30px;
+    }
+
+    @media (max-width: 991px) {
+        #section_{{section.id}} .FlexItem:first-child {
+            padding-right: 0px;
+        }
+
+        #section_{{section.id}} .FlexItem:last-child {
+            padding-left: 0px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        #section_{{section.id}} .SectionButton a {
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 31px;
+        }      
+
+        #section_{{section.id}} .SectionText {
+            max-width: 320px;
+        }
+
+
+    }
+
+  /*
+    #btn_learn1 {
+        width: 180px;
+    }
+
+    #btn_learn2 {
+        width: 230px;
+    }
+
+    #btn_learn3 {
+        width: 270px;
+    }
+  */
+</style>
+
+<div class="section offset" id="section_{{section.id}}">  
+    <div class="Container">
+        <div class="FlexBox">
+            <div class="FlexItem">
+                {%- if section.settings.text != blank -%}
+                <div class="SectionText">{{section.settings.text}}</div>
+                {%- endif -%}
+            </div>
+
+            <div class="FlexItem">
+                <h4 class="SectionSmallSubtitle">LEARN MORE</h4>
+
+                {%- if section.settings.cta_link1 != blank -%}
+                <div class="SectionButton">
+                    <a href="{{section.settings.cta_link1}}" id="btn_learn1">{{section.settings.cta_label1}}&nbsp;&nbsp;&nbsp; <img class="lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{'button-arrow.svg' | file_url}}" /></a>
+                </div>
+                {%- endif -%}
+
+                {%- if section.settings.cta_link2 != blank -%}
+                <div class="SectionButton">
+                    <a href="{{section.settings.cta_link2}}" id="btn_learn2">{{section.settings.cta_label2}}&nbsp;&nbsp;&nbsp; <img class="lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{'button-arrow.svg' | file_url}}" /></a>
+                </div>
+                {%- endif -%}
+
+                {%- if section.settings.cta_link3 != blank -%}
+                <div class="SectionButton">
+                    <a href="{{section.settings.cta_link3}}" id="btn_learn3">{{section.settings.cta_label3}}&nbsp;&nbsp;&nbsp; <img class="lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{'button-arrow.svg' | file_url}}" /></a>
+                </div>
+                {%- endif -%}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Learn",  
+  "settings": [
+      {
+        "type": "html",
+        "id": "text",
+        "label": "Description"
+      },
+      {
+        "type": "header",
+        "content": "CTA1"
+      },
+      {
+        "type": "url",
+        "id": "cta_link1",
+        "label": "CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "cta_label1",
+        "label": "CTA Label"
+      },
+     {
+        "type": "header",
+        "content": "CTA2"
+      },
+      {
+        "type": "url",
+        "id": "cta_link2",
+        "label": "CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "cta_label2",
+        "label": "CTA Label"
+      },
+     {
+        "type": "header",
+        "content": "CTA3"
+      },
+      {
+        "type": "url",
+        "id": "cta_link3",
+        "label": "CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "cta_label3",
+        "label": "CTA Label"
+      }
+	],
+  "presets": [
+    {
+      "name": "Section Learn",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

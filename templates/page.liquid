@@ -1,0 +1,24 @@
+<div class="grid">
+
+  <div class="grid__item post-large--two-thirds push--post-large--one-sixth">
+
+    <div class="section-header">
+      <h1 class="section-header--title">{{ page.title }}</h1>
+    </div>
+
+    <div class="rte">
+      {{ page.content }}
+    </div>
+
+  </div>
+
+</div>
+<script>
+  $(document).ready(function(){  
+    $('.rte').find('iframe').attr('data-src',$('.rte').find('iframe').attr('src'));
+    $('.rte').find('iframe').attr('src','');
+    $('.rte').find('iframe').wrap('<div class="video-wrapper"></div>');
+
+  	
+  })
+</script>

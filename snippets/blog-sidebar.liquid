@@ -1,0 +1,31 @@
+<h3 class="h4">{{ 'blogs.sidebar.recent_articles' | t }}</h3>
+{% for article in blogs[blog.handle].articles limit:6 %}
+  <p>
+    <a href="{{ article.url }}">{{ article.title }}</a>
+    <br>
+    <time pubdate datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}">
+      <em class="text-light">{{ article.published_at | date: format: 'date' }}</em>
+    </time>
+  </p>
+{% endfor %}
+
+{% if blog.all_tags.size > 0 %}
+  <h3 class="h4">{{ 'blogs.sidebar.categories' | t }}</h3>
+  <ul>
+    {% for tag in blog.all_tags %}
+      {% if current_tags contains tag %}
+      <li>{{ tag }}</li>
+      {% else %}
+      <li>{{ tag | link_to_tag: tag }}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<h3 class="h4">Blogs</h3>
+<ul>
+  <li><a href="https://greenfish.co.za/blogs/captains-log">Captain's Log</a></li>
+  <li><a href="https://greenfish.co.za/blogs/fishwife-recipes">Fishwife Recipes</a></li>
+  <li><a href="https://greenfish.co.za/blogs/gf">Greenfish Blog</a></li>
+  <li><a href="https://greenfish.co.za/blogs/blogs-by-jeremy">Blog Contributions by Others</a></li>
+</ul>

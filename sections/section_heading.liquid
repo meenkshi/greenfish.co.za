@@ -1,0 +1,29 @@
+
+<div class="section offset" id="section_{{section.id}}">  
+    <div class="Container">
+        {%- if section.settings.title != blank -%}
+        <div class="SectionHeader center">
+            <h2 class="SectionSmallTitle">{{section.settings.title}}</h2>
+        </div>
+        {%- endif -%}
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Heading",  
+  "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+  ],
+  "presets": [
+    {
+      "name": "Section Heading",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

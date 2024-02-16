@@ -1,0 +1,40 @@
+<ul class="accordion-list">
+  <li class="accordion-item active">
+    <h2>About</h2>
+    <div class="answer">
+      {{ product.description }}      
+    </div>
+  </li>
+
+  {%- if product.metafields.global.instructions != blank and product.metafields.global.instructions != '<p></p>' -%}
+  <li class="accordion-item">
+    <h2>Instructions</h2>
+    <div class="answer">{{ product.metafields.global.instructions }}</div>
+  </li>
+  {%- endif -%}
+
+  {%- if product.metafields.global.sustainability != blank and product.metafields.global.sustainability != '<p></p>' -%}
+  <li class="accordion-item">
+    <h2>Eco rating</h2>
+    <div class="answer">{{ product.metafields.global.sustainability }}</div>
+  </li>
+  {%- endif -%}
+
+  {%- if product.metafields.global.recipes != blank and product.metafields.global.recipes != '<p></p>' -%}
+  <li class="accordion-item">
+    <h2>Fishwife Recipes</h2>
+    <div class="answer">{{ product.metafields.global.recipes }}</div>
+  </li>
+  {%- endif -%}
+
+  {% if product.type != "wk_project" %}
+  <li class="accordion-item">
+    <h2>Delivery</h2>
+    <div class="answer">
+      {{ pages[section.settings.extra_tab_content].content }}      
+    </div>
+  </li>
+  {% endif %}
+
+
+</ul>

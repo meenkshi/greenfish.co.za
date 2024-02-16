@@ -1,0 +1,111 @@
+<style>
+    #section_{{section.id}} {
+        padding: 70px 0 50px;
+        background-color: #EAEAEA;
+    }
+
+    @media (max-width: 767px) {
+        #section_{{section.id}} {
+            padding: 50px 0 40px;
+        }
+    }
+
+    #section_{{section.id}} .SectionContent form .form-row {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+    #section_{{section.id}} .form-row {
+        display: flex;
+    }
+
+    #section_{{section.id}} .form-row input {
+        margin-bottom: 0px;
+        color: #939191;
+        font-family: "proxima-nova",sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.55px;
+        line-height: 24px;
+        padding: 12px 15px;
+    }
+
+    #section_{{section.id}} .form-item:first-child {
+        width: calc(100% - 270px);
+    }
+
+    @media (max-width: 767px) {
+        #section_{{section.id}} .form-row {
+            display: block;
+        }
+
+        #section_{{section.id}} .form-item:first-child {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #section_{{section.id}} .form-item {
+            width: 100%;
+        }
+
+        #section_{{section.id}} button.btn_newsletter {
+            width: 100%;
+        }
+    }
+
+</style>
+<div class="section" id="section_{{section.id}}">  
+    <div class="Container">
+        {%- if section.settings.title != blank -%}
+        <div class="SectionHeader center">
+            <h2 class="SectionSmallTitle">{{section.settings.title}}</h2>
+        </div>
+        {%- endif -%}
+
+        <div class="SectionContent">
+            {% form 'customer' %}
+            {{ form.errors | default_errors }}
+            {% if form.posted_successfully? %}
+                <p class="note form-success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+            {% else %}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="form-row">
+                    <div class="form-item">
+                        <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+                    </div>
+
+                    <div class="form-item">
+                        <button type="submit" class="btn_newsletter" name="commit" id="subscribe">{{ 'general.newsletter_form.submit' | t }}</button>
+                    </div>
+                </div>
+            {% endif %}
+            {% endform %}
+
+            {%- if section.settings.description != blank -%}
+            <p class="SectionSmallText">{{section.settings.description}}</p>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",  
+  "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+      }
+	],
+  "presets": [
+    {
+      "name": "Section Newsletter",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

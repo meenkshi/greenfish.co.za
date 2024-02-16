@@ -1,0 +1,114 @@
+<style>
+#section_{{section.id}} .ContentBox {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    right: 15px;
+    -webkit-transform: translate(0px, -50%);
+    -ms-transform: translate(0px, -50%);
+    transform: translate(0px, -50%);
+    text-align: center;
+}
+
+#section_{{section.id}} h2.SectionTitle {
+    margin-bottom: 95px;
+}
+
+#section_{{section.id}} .SectionSubtitle {
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@media (max-width: 767px) {
+    #section_{{section.id}} .ContentBox {
+        top: auto;
+        bottom: 65px;
+        transform: translate(0px, 0%);
+    }
+}
+
+@media (max-width: 767px) {
+    #section_{{section.id}} h2.SectionTitle {
+        margin-bottom:  70px;
+    }
+    #section_{{section.id}} .SectionSubtitle {
+        max-width: 320px;
+    }
+}
+
+</style>
+
+<div class="section" id="section_{{section.id}}">  
+    <div class="OverlayBox">
+        {%- if section.settings.image1 != blank -%}
+        <div class="DesktopImage">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{section.settings.image1 | img_url: 'master'}}" alt="" class="full-img lazy2 lazy3 "/>        
+        </div>
+        {%- endif -%}
+        {%- if section.settings.image2 != blank -%}
+        <div class="MobileImage">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{section.settings.image2 | img_url: 'master'}}" alt="" class="full-img lazy2 lazy3 "/>        
+        </div>
+        {%- endif -%}
+    </div>
+
+    <div class="ContentBox">
+        {%- if section.settings.title != blank -%}
+        <h2 class="SectionTitle">{{section.settings.title}}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.subtitle != blank -%}
+        <p class="SectionSubtitle">{{section.settings.subtitle}}</p>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank -%}
+        <a href="{{section.settings.cta_link}}" class="SectionLink">{{section.settings.cta_label}}</a>
+        {%- endif -%}        
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image and Text",  
+  "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA Label"
+      },
+      {
+        "type": "image_picker",
+        "id": "image1",
+        "label": "Desktop Image"            
+      },
+      {
+        "type": "image_picker",
+        "id": "image2",
+        "label": "Mobile Image"            
+      }
+	],
+  "presets": [
+    {
+      "name": "Section Image",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

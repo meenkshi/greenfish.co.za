@@ -1,0 +1,147 @@
+<style>
+#section_{{section.id}} .ContentBox {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    right: 15px;
+    -webkit-transform: translate(0px, -50%);
+    -ms-transform: translate(0px, -50%);
+    transform: translate(0px, -50%);
+    text-align: center;
+}
+
+#section_{{section.id}} h2.SectionTitle {
+    margin-bottom: 80px;
+}
+
+@media (max-width: 767px) {
+    #section_{{section.id}} .ContentBox {
+        top: auto;
+        bottom: 70px;
+        transform: translate(0px, 0%);
+    }
+}
+#section_{{section.id}} .SectionSubtitle {
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#section_{{section.id}} .OverlayBox {
+  height: 670px;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;    
+}
+
+@media (max-width: 991px) {
+  #section_{{section.id}} .OverlayBox {
+    height: 580px;
+  }
+}
+
+@media (max-width: 767px) {
+  #section_{{section.id}} .OverlayBox {
+    height: 530px;
+  }
+}
+
+@media (max-width: 440px) {
+  #section_{{section.id}} .OverlayBox {
+    height: 480px;
+  }
+}
+
+
+@media (min-width: 768px) {
+  #section_{{section.id}} .OverlayBox {
+    background-image: url({{section.settings.image1 | img_url: 'master'}});
+  }
+}
+
+@media (max-width: 767px) {
+  #section_{{section.id}} .OverlayBox {
+    background-image: url({{section.settings.image2 | img_url: 'master'}});
+  } 
+}
+
+
+</style>
+
+<div class="section" id="section_{{section.id}}">  
+    <div class="OverlayBox">
+
+    </div>
+
+    <div class="ContentBox">
+        {%- if section.settings.title != blank -%}
+        <h2 class="SectionTitle">{{section.settings.title}}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.subtitle != blank -%}
+        <p class="SectionSubtitle">{{section.settings.subtitle}}</p>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank -%}
+        <a href="{{section.settings.cta_link}}" class="SectionLink">{{section.settings.cta_label}}</a>
+        {%- endif -%}        
+    </div>
+
+    {%- if section.settings.review != blank -%}
+    <div class="ReviewBox"><span>{{section.settings.mark}}</span>&nbsp;&nbsp;{{section.settings.review}}</div>
+    {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Banner Image",  
+  "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA Label"
+      },
+      {
+        "type": "image_picker",
+        "id": "image1",
+        "label": "Desktop Image"            
+      },
+      {
+        "type": "image_picker",
+        "id": "image2",
+        "label": "Mobile Image"            
+      },
+      {
+        "type": "html",
+        "id": "review",
+        "label": "Review Code"            
+      },
+      {
+        "type": "text",
+        "id": "mark",
+        "label": "Review Mark"            
+      }
+	],
+  "presets": [
+    {
+      "name": "Section Banner",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

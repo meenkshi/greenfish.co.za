@@ -1,0 +1,101 @@
+<div class="product-single__photos">    
+    {% assign hasVideo = false %}
+    {% for media in product.media %}
+        {% assign image = media %}
+        {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
+        {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
+
+        {% case media.media_type %}
+        {% when 'external_video' %}
+            {% assign hasVideo = true %}
+            <div id="{{ img_wrapper_id }}"  class="product-single__image-wrapper" data-image-id="{{ image.id }}" >
+                <div class="videoWrapper">
+                    <div class="videoContent" data-media-id="{{ media.id }}" id="youtube_video" data="{{media.external_id }}"></div>
+                </div>
+            </div>
+        {% else %}
+
+        {% endcase %}
+    {% endfor %}
+
+    {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+    {% if hasVideo == true %}
+        {% assign featured_image = null %}
+    {% endif %}
+
+    {% for media in product.media %}
+        {% assign image = media %}
+        {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
+        {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
+
+        {% case media.media_type %}
+        {% when 'image' %}
+            {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            {% include 'image-style' with image: image, small_style: false, width: 700, height: 1024, wrapper_id: img_wrapper_id, img_id: img_id %}
+
+            <div id="{{ img_wrapper_id }}" class="product-single__image-wrapper supports-js{% unless featured_image == image %} hide{% endunless %}{% if section.settings.product_image_zoom_type == 'lightbox' %} zoom-lightbox{% endif %}" data-image-id="{{ image.id }}">
+                <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+                <img id="{{ img_id }}"
+                    class="lazy2 {% if forloop.first == true %} lazy3 {% endif %} product-single__image lazyloaded{% unless featured_image == image %} lazypreload{% endunless %}"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                    data-srcset="{{ image | img_url: '1728x' }} 1536w,{{ image | img_url: '1296x' }} 1280w,{{ image | img_url: '900x' }} 768w,{{ image | img_url: '540x'}} 320w"
+                    data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-sizes="auto"
+                    {% if section.settings.product_image_zoom_type == 'zoom-in' %} data-zoom="{{ image | img_url: '1024x1024', scale: 2 }}"{% endif %}
+                    alt="{{ image.alt | escape }}">
+                </div>
+            </div>
+        {% else %}
+
+        {% endcase %}
+    {% endfor %}
+
+    <noscript>
+        <img src="{{ featured_image | img_url: '1024x1024', scale: 2 }}" alt="{{ featured_image.alt | escape }}">
+    </noscript>
+</div>
+
+{% if product.media.size > 1 %}
+
+<ul class="product-single__thumbnails grid-uniform" id="ProductThumbs">
+    {% for media in product.media %}
+        {% assign image = media %}
+        {% case media.media_type %}
+        {% when 'external_video' %}
+        <li class="grid__item wide--one-quarter large--one-third medium-down--one-third">
+            <a data-image-id="{{ image.id }}" href="{{ image | img_url: '1024x1024' }}" class="product-single__thumbnail" data-type="video">
+                <img class="lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ image | img_url: '200x200' }}" alt="{{ image.alt | escape }}">
+            </a>
+        </li>
+        {% else %}
+
+        {% endcase %}
+    {% endfor %}
+
+    {% for media in product.media %}
+        {% assign image = media %}
+        {% case media.media_type %}
+        {% when 'image' %}
+        <li class="grid__item wide--one-quarter large--one-third medium-down--one-third">
+            <a data-image-id="{{ image.id }}" href="{{ image.src | img_url: '1024x1024' }}" class="product-single__thumbnail" data-type="image">
+            <img class="lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ image.src | img_url: 'grande' }}" alt="{{ image.alt | escape }}">
+            </a>
+        </li>
+        {% else %}
+
+        {% endcase %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+
+
+{% if section.settings.product_image_zoom_type == 'lightbox' %}
+<ul class="gallery" class="hidden">
+    {% for image in product.media %}
+    <li data-image-id="{{ image.id }}" class="gallery__item" data-mfp-src="{{ image | img_url: '1024x1024', scale: 2 }}"></li>
+    {% endfor %}
+</ul>
+{% endif %}

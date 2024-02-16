@@ -1,0 +1,70 @@
+<style>
+#section_{{section.id}} .Container {
+    padding: 0 25px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+</style>
+
+<div class="section offset" id="section_{{section.id}}">  
+    <div class="Container">
+        {%- if section.settings.title != blank -%}
+        <div class="SectionHeader center">
+            <h2 class="SectionSmallTitle">{{section.settings.title}}</h2>
+        </div>
+        {%- endif -%}
+
+        <div class="SectionContent">
+            <div class="LogosBox">
+            {%- for block in section.blocks -%}
+                <div class="LogoItem">
+                    {%- if block.settings.image != blank -%}
+                    <img class="lazy2 lazy3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{block.settings.image | img_url: 'master'}}" alt="{{block.settings.text}}" />
+                    {%- endif -%}
+
+                    {%- if block.settings.text != blank -%}
+                    <div class="SectionLabel">{{block.settings.text}}</div>
+                    {%- endif -%}
+                </div>
+            {%- endfor -%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Logos",  
+  "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+  ],
+  "blocks": [
+      {
+        "type": "logo",
+        "name": "Logo",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text"            
+          },
+		  {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Desktop Image"            
+          }
+        ]
+      }
+  ],
+  "presets": [
+    {
+      "name": "Section Logos",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
